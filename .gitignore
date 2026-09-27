@@ -1,0 +1,32 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+.cache/
+.vite/
+.turbo/
+.codex/
+.DS_Store
+Thumbs.db
+artifacts/
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Local inspection reports, exports, and retired generated compositions.
+/design/resume-changes.json
+/design/figma/*
+!/design/figma/source-assets/
+/design/figma/source-assets/*
+
+# Original photo sources used by scripts/optimize-assets.cjs.
+!/design/figma/source-assets/intro-b0f2d.png
+!/design/figma/source-assets/voice-9f69b.png
+!/design/figma/source-assets/voice-58f83.png
+!/design/figma/source-assets/voice-fb09c.png
+!/design/figma/source-assets/voice-04309.png
+!/design/figma/source-assets/voice-0994a.png
+!/design/figma/source-assets/voice-c1fe8.png
