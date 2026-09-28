@@ -2,10 +2,17 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { links, records, showcases, work } from './content';
 
 import StaticShowcases from './demos/StaticShowcases';
+import InteractionShowcases from './interactions/InteractionShowcases';
 import { RulerOverlay } from './RulerOverlay';
 
 function TextLink({ name, children }: { name: string; children: ReactNode }) {
-  return links[name] ? <a className="text-link" href={links[name]}>{children}</a> : <span className="link-text">{children}</span>;
+  return links[name] ? <a className="text-link" href={links[name]} onClick={name === 'selectedWork' ? event => {
+    event.preventDefault();
+    document.getElementById('selected-work')?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  } : undefined}>{children}</a> : <span className="link-text">{children}</span>;
 }
 
 function Intro() {
@@ -72,17 +79,26 @@ function Footer() {
 }
 
 export function Portfolio() {
+  const [mode, setMode] = useState<'static' | 'interaction'>('static');
 
   return <main className="portfolio">
     <h1 className="sr-only">Mustofa — Product, interaction, and visual design</h1>
     <Intro />
     <div className="profile-divider" />
-    <div id="selected-work" className="mode-toggle" role="tablist" aria-label="Showcase mode">
-      <button id="static-tab" role="tab" aria-selected="true" aria-controls="showcase-panel">Static</button>
-      <button id="interaction-tab" role="tab" aria-selected="false" disabled tabIndex={-1}>Interaction</button>
+    <div id="selected-work" className="mode-toggle" role="tablist" aria-label="Showcase mode" onKeyDown={event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'ArrowRight' || event.key === 'End' ? 'interaction' : 'static';
+      setMode(next);
+      event.currentTarget.querySelector<HTMLButtonElement>(`#${next}-tab`)?.focus();
+    }}>
+      <button id="static-tab" role="tab" aria-selected={mode === 'static'} aria-controls="showcase-panel"
+        tabIndex={mode === 'static' ? 0 : -1} onClick={() => setMode('static')}>Static</button>
+      <button id="interaction-tab" role="tab" aria-selected={mode === 'interaction'} aria-controls="showcase-panel"
+        tabIndex={mode === 'interaction' ? 0 : -1} onClick={() => setMode('interaction')}>Interaction</button>
     </div>
-    <div id="showcase-panel" role="tabpanel" aria-labelledby="static-tab" className="showcase-list">
-      <StaticShowcases />
+    <div id="showcase-panel" role="tabpanel" aria-labelledby={`${mode}-tab`} className="showcase-list">
+      {mode === 'static' ? <StaticShowcases /> : <InteractionShowcases />}
     </div>
     <Footer />
   </main>;

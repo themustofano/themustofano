@@ -37,7 +37,7 @@ export function DatePickerDemo() {
             const offset = ({ ArrowRight: 1, ArrowLeft: -1, ArrowDown: 7, ArrowUp: -7 } as Record<string, number>)[e.key];
             if (offset) { e.preventDefault(); const target = e.currentTarget.parentElement?.children[i + offset] as HTMLButtonElement | undefined; target?.focus(); }
           }} onClick={e => { lastDay.current = e.currentTarget; setRange(e.shiftKey ? [Math.min(range[0], value), Math.max(range[0], value)] : [value, value]); setPreset(''); setNote(notes[value] || ''); setOpen(true); }}>
-            {day.getMonth() === 8 && day.getDate() === 28 ? 29 : day.getDate()}{notes[value] && <span className="note-dot" />}
+            {day.getDate()}{notes[value] && <span className="note-dot" />}
           </button>;
         })}</div>
       </div>
