@@ -24,15 +24,15 @@ function Intro() {
       <p className="section-heading">Hello, Ciao, 안녕하세요, Hai, こんにちは</p>
       <div className="biography">
         <p>I’m Mustofa, a designer working across product, interaction, and visual design.</p>
-        <p>I didn’t start out in design. I came from the F&amp;B industry, and over time found my way into this world. I’m now at <TextLink name="Blissful Studio">Blissful Studio</TextLink>, working with teams across different products and industries, and still learning as I go.</p>
-        <p>Outside of work, I train weighted calisthenics and enjoy running.</p>
+        <p>I didn’t start out in design. I came from the F&amp;B industry, and over time found my way into this world. I’m now at <TextLink name="Blissful Studio">Blissful Studio</TextLink>, working with teams across different products, industries, and still learning as I go.</p>
+        <p>Outside of work, I train weighted calisthenics and <span className="mobile-nowrap">enjoy running.</span></p>
         <p>Explore my <TextLink name="selectedWork">Selected work</TextLink>.</p>
       </div>
     </section>
     <section aria-labelledby="work-heading">
       <h2 id="work-heading" className="section-heading">I’ve worked with</h2>
       <ul className="detail-rows">
-        {work.map(([name, category, year]) => <li key={name}><TextLink name={name}>{name}</TextLink><span className="metadata">{category} <span className="slash">/</span> {year}</span></li>)}
+        {work.map(([name, category, year]) => <li key={name} className={name === 'Echovane' ? 'echovane-row' : undefined}><TextLink name={name}>{name}</TextLink><span className="metadata">{category} <span className="slash">/</span> {year}</span></li>)}
       </ul>
     </section>
     <section aria-labelledby="pr-heading">

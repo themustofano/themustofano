@@ -332,6 +332,43 @@ footer {
   white-space: nowrap;
 }
 @media(max-width:600px) {
+  .mobile-nowrap {
+    white-space: nowrap;
+  }
+  .detail-rows li.echovane-row {
+    gap: 2px;
+  }
+  .echovane-row .metadata {
+    max-width: none;
+    white-space: nowrap;
+    font-size: clamp(11px, calc(5.55vw - 6.67px), 14px);
+    letter-spacing: -.25px;
+  }
+  button,a,input,textarea,select,label,[role="tab"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .agent-menu button img {
+    width: 14px;
+    height: 14px;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 14px;
+    align-self: center;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .product-icon {
+    width: 33px;
+    height: 33px;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 33px;
+    padding: 0;
+    place-items: center;
+  }
+  .product-icon img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
   .portfolio {
     padding-top: 64px;
     padding-bottom: 40px;

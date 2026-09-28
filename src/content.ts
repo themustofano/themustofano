@@ -36,7 +36,7 @@ export const records = [
   ['Weighted dips', '25kg x 10reps'],
   ['Bodyweight pull-up', '12reps'],
   ['Weighted squat', '55kg x 10reps'],
-  ['Static skills', 'soon'],
+  ['Static skills', 'Soon'],
 ] as const;
 
 export const showcases = [
