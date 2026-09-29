@@ -20,7 +20,7 @@ export default function InteractionShowcases() {
     <InteractionCard label="Date Picker">
       <DemoCanvas label="Interactive date picker"><InteractionDatePicker /></DemoCanvas>
     </InteractionCard>
-    <InteractionCard label="Header" dark><InteractionHeader /></InteractionCard>
     <InteractionCard label="Profile" dark><InteractionProfile /></InteractionCard>
+    <InteractionCard label="Header" dark><InteractionHeader /></InteractionCard>
   </>;
 }

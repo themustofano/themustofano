@@ -10,7 +10,8 @@
   height: 100%;
 }
 .interaction-profile-demo .profile-controls { top: 26%; }
-.interaction-profile-demo button:is(:hover, :active) { filter: none; }
+.interaction-profile-demo button:is(:hover, :active):not(:disabled) { filter: none; }
+.interaction-profile-demo .profile-trigger { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 600px) {
   .interaction-card[data-interaction='profile'] .artboard { aspect-ratio: auto; height: 320px; }
   .interaction-profile-demo .profile-controls { top: 36px; }

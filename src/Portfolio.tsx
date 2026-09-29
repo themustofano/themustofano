@@ -85,7 +85,7 @@ export function Portfolio() {
     <h1 className="sr-only">Mustofa — Product, interaction, and visual design</h1>
     <Intro />
     <div className="profile-divider" />
-    <div id="selected-work" className="mode-toggle" role="tablist" aria-label="Showcase mode" onKeyDown={event => {
+    <div id="selected-work" className="mode-toggle" data-mode={mode} role="tablist" aria-label="Showcase mode" onKeyDown={event => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
       const next = event.key === 'ArrowRight' || event.key === 'End' ? 'interaction' : 'static';

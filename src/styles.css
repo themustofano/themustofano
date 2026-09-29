@@ -201,12 +201,32 @@ button:hover {
 }
 .mode-toggle {
   display: flex;
+  position: relative;
   background: #f2f2f2;
   border-radius: 999px;
   height: 33px;
   scroll-margin-top: 32px;
 }
+.mode-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 100%;
+  border-radius: inherit;
+  background: #fff;
+  box-shadow: var(--panel-shadow),inset 0 .5px .5px #ffffff40,inset 0 -.5px .5px #0000001a,inset 0 0 0 .5px #0000001a;
+  pointer-events: none;
+  transform: translateX(0);
+  transition: transform 200ms cubic-bezier(.25,1,.5,1), width 200ms cubic-bezier(.25,1,.5,1);
+}
+.mode-toggle[data-mode='interaction']::before {
+  width: 103px;
+  transform: translateX(70px);
+}
 .mode-toggle button {
+  position: relative;
   filter: none;
   padding: 6px 16px;
   line-height: 21px;
@@ -215,9 +235,7 @@ button:hover {
   letter-spacing: -.07px;
 }
 .mode-toggle button[aria-selected=true] {
-  background: #fff;
   color: #000;
-  box-shadow: var(--panel-shadow),inset 0 .5px .5px #ffffff40,inset 0 -.5px .5px #0000001a,inset 0 0 0 .5px #0000001a;
 }
 .mode-toggle button:first-child {
   width: 70px;
@@ -268,7 +286,8 @@ button:hover {
 }
 .card-controls {
   background: #fafafa;
-  height: 61px;
+  height: 53px;
+  padding-block: 16px;
   border-top: 0;
   box-shadow: inset 0 .5px #0000001a;
   border-radius: 0 0 16px 16px;
@@ -277,7 +296,7 @@ button:hover {
   justify-content: center;
 }
 .first-card .card-controls {
-  height: 60px;
+  height: 52px;
 }
 .card-controls label {
   display: flex;
