@@ -6,7 +6,9 @@ import InteractionShowcases from './interactions/InteractionShowcases';
 import { RulerOverlay } from './RulerOverlay';
 
 function TextLink({ name, children }: { name: string; children: ReactNode }) {
-  return links[name] ? <a className="text-link" href={links[name]} onClick={name === 'selectedWork' ? event => {
+  const href = links[name];
+  const external = href?.startsWith('https://') || href?.startsWith('http://');
+  return href ? <a className="text-link" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} onClick={name === 'selectedWork' ? event => {
     event.preventDefault();
     document.getElementById('selected-work')?.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -24,7 +26,7 @@ function Intro() {
           <path d="M26.3551 1.90483L23.0739 14.0952H22L25.2812 1.90483H26.3551Z" />
           <path d="M58.7102 1.90483L55.429 14.0952H54.3551L57.6364 1.90483H58.7102Z" />
         </svg>
-        {['X', 'Dribbble', 'Instagram'].map((name, i) => links[name] && <a key={name} href={links[name]} aria-label={name} style={{ left: `${i * 32.35511398}px` }}><span className={`social-icon social-${name.toLowerCase()}`} /></a>)}
+        {['X', 'Dribbble', 'Instagram'].map((name, i) => links[name] && <a key={name} href={links[name]} target="_blank" rel="noopener noreferrer" aria-label={name} style={{ left: `${i * 32.35511398}px` }}><span className={`social-icon social-${name.toLowerCase()}`} /></a>)}
       </div>
     </header>
     <section className="intro" aria-label="About Mustofa">
