@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { links, records, showcases, work } from './content';
 
 import StaticShowcases from './demos/StaticShowcases';
@@ -59,11 +59,10 @@ function Intro() {
 
 export function ShowcaseCard({ item, children }: { item: typeof showcases[number]; children: ReactNode }) {
   const [rulers, setRulers] = useState(false);
-  const artboard = useRef<HTMLDivElement>(null);
   return <article className={`showcase-card ${item.id === 'date' ? 'first-card' : ''}`} aria-label={item.name} data-showcase={item.id}>
-    <div ref={artboard} className={`artboard ${item.id === 'nav' ? 'dark-artboard' : ''}`}>
+    <div className={`artboard ${item.id === 'nav' ? 'dark-artboard' : ''}`}>
       {children}
-      <RulerOverlay id={item.id} artboard={artboard} visible={rulers} />
+      <RulerOverlay id={item.id} visible={rulers} />
     </div>
     <div className="card-controls">
       <label>
@@ -87,6 +86,8 @@ export function Portfolio() {
     <h1 className="sr-only">Mustofa — Product, interaction, and visual design</h1>
     <Intro />
     <div className="profile-divider" />
+    <section className="selected-work-section" aria-label="Selected work">
+    <div className="showcase-navigation">
     <div id="selected-work" className="mode-toggle" data-mode={mode} role="tablist" aria-label="Showcase mode" onKeyDown={event => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
@@ -99,9 +100,11 @@ export function Portfolio() {
       <button id="interaction-tab" role="tab" aria-selected={mode === 'interaction'} aria-controls="showcase-panel"
         tabIndex={mode === 'interaction' ? 0 : -1} onClick={() => setMode('interaction')}>Interaction</button>
     </div>
+    </div>
     <div id="showcase-panel" role="tabpanel" aria-labelledby={`${mode}-tab`} className="showcase-list">
       {mode === 'static' ? <StaticShowcases /> : <InteractionShowcases />}
     </div>
+    </section>
     <Footer />
   </main>;
 }
