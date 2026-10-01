@@ -10,9 +10,15 @@ function TextLink({ name, children }: { name: string; children: ReactNode }) {
   const external = href?.startsWith('https://') || href?.startsWith('http://');
   return href ? <a className="text-link" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} onClick={name === 'selectedWork' ? event => {
     event.preventDefault();
-    document.getElementById('selected-work')?.scrollIntoView({
+    const section = document.querySelector<HTMLElement>('.selected-work-section');
+    const navigation = section?.querySelector<HTMLElement>('.showcase-navigation');
+    if (!section || !navigation) return;
+    const gap = Number.parseFloat(getComputedStyle(section).rowGap);
+    const stickyTop = Number.parseFloat(getComputedStyle(navigation).top);
+    const landingTop = Math.max(gap, stickyTop);
+    window.scrollTo({
+      top: window.scrollY + section.getBoundingClientRect().top - landingTop,
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      block: 'start',
     });
   } : undefined}>{children}</a> : <span className="link-text">{children}</span>;
 }
@@ -39,7 +45,7 @@ function Intro() {
       </div>
     </section>
     <section aria-labelledby="work-heading">
-      <h2 id="work-heading" className="section-heading">I’ve worked with</h2>
+      <h2 id="work-heading" className="section-heading">Recent engagements</h2>
       <ul className="detail-rows">
         {work.map(([name, category, year]) => <li key={name} className={name === 'Echovane' ? 'echovane-row' : undefined}><TextLink name={name}>{name}</TextLink><span className="metadata">{category} <span className="slash">/</span> {year}</span></li>)}
       </ul>
