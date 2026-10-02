@@ -45,5 +45,6 @@ export const showcases = [
   { id: 'nav', name: 'Product navigation', node: '4941:449', bounds: [70, 49.25, 560, 175] },
   { id: 'composer', name: 'Aspect ratio and prompt composer', node: '4941:531', bounds: [135, 235, 430, 130] },
   { id: 'agent', name: 'Agent selector', node: '4941:587', bounds: [125, 268, 450, 100] },
+  { id: 'analytics', name: 'Analytics chart', node: '4995:2991', bounds: [111, 45.5, 478, 458] },
 ] as const;
 export type ShowcaseId = typeof showcases[number]['id'];
