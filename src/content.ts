@@ -46,5 +46,9 @@ export const showcases = [
   { id: 'composer', name: 'Aspect ratio and prompt composer', node: '4941:531', bounds: [135, 235, 430, 130] },
   { id: 'agent', name: 'Agent selector', node: '4941:587', bounds: [125, 268, 450, 100] },
   { id: 'analytics', name: 'Analytics chart', node: '4995:2991', bounds: [111, 45.5, 478, 458] },
+  { id: 'phone', name: 'Phone / AI Detector', node: '5015:1808', bounds: [0, 0, 700, 549] },
+  { id: 'all-in-one', name: 'The All-in-One App Era Is Over', node: '5017:1963', bounds: [186, 32, 328, 526] },
+  { id: 'future', name: 'Build What You Need / Future', node: '5017:2015', bounds: [155, 79, 390, 390] },
+  { id: 'collective', name: 'D/G/TAL MAKER COLLECT/VE', node: '5017:3021', bounds: [200, 57, 300, 435] },
 ] as const;
 export type ShowcaseId = typeof showcases[number]['id'];

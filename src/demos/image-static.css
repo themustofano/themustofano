@@ -1,0 +1,7 @@
+[data-showcase="all-in-one"] .artboard { aspect-ratio: 700 / 590; }
+[data-showcase="all-in-one"] .demo-canvas { height: 590px; }
+[data-showcase="future"] .artboard,
+[data-showcase="collective"] .artboard { aspect-ratio: 700 / 549; }
+[data-showcase="future"] .demo-canvas,
+[data-showcase="collective"] .demo-canvas { height: 549px; }
+.image-static-artwork { display: block; width: 700px; height: 100%; object-fit: contain; }

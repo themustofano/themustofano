@@ -1,0 +1,3 @@
+[data-showcase="phone"] .artboard { aspect-ratio: 700 / 549; }
+[data-showcase="phone"] .demo-canvas { height: 549px; }
+.phone-detector-artwork { display: block; width: 700px; height: 549px; object-fit: contain; }

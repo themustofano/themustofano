@@ -5,6 +5,53 @@ import StaticShowcases from './demos/StaticShowcases';
 import InteractionShowcases from './interactions/InteractionShowcases';
 import { RulerOverlay } from './RulerOverlay';
 
+let cancelSelectedWorkScroll: (() => void) | null = null;
+
+function scrollToSelectedWork(targetY: number) {
+  cancelSelectedWorkScroll?.();
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.scrollTo(0, targetY);
+    return;
+  }
+
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  if (Math.abs(distance) < 0.5) return;
+
+  const duration = 900;
+  const decay = 5;
+  const startTime = performance.now();
+  let frame = 0;
+
+  const cancel = () => {
+    window.cancelAnimationFrame(frame);
+    window.removeEventListener('wheel', cancel);
+    window.removeEventListener('touchstart', cancel);
+    window.removeEventListener('pointerdown', cancel);
+    window.removeEventListener('keydown', onKeyDown, true);
+    if (cancelSelectedWorkScroll === cancel) cancelSelectedWorkScroll = null;
+  };
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) cancel();
+  };
+
+  window.addEventListener('wheel', cancel, { passive: true });
+  window.addEventListener('touchstart', cancel, { passive: true });
+  window.addEventListener('pointerdown', cancel, { passive: true });
+  window.addEventListener('keydown', onKeyDown, true);
+  cancelSelectedWorkScroll = cancel;
+
+  const tick = (now: number) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = (1 - Math.exp(-decay * progress)) / (1 - Math.exp(-decay));
+    window.scrollTo(0, progress === 1 ? targetY : startY + distance * eased);
+    if (progress < 1) frame = window.requestAnimationFrame(tick);
+    else cancel();
+  };
+  frame = window.requestAnimationFrame(tick);
+}
+
 function TextLink({ name, children }: { name: string; children: ReactNode }) {
   const href = links[name];
   const external = href?.startsWith('https://') || href?.startsWith('http://');
@@ -16,10 +63,7 @@ function TextLink({ name, children }: { name: string; children: ReactNode }) {
     const gap = Number.parseFloat(getComputedStyle(section).rowGap);
     const stickyTop = Number.parseFloat(getComputedStyle(navigation).top);
     const landingTop = Math.max(gap, stickyTop);
-    window.scrollTo({
-      top: window.scrollY + section.getBoundingClientRect().top - landingTop,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    });
+    scrollToSelectedWork(window.scrollY + section.getBoundingClientRect().top - landingTop);
   } : undefined}>{children}</a> : <span className="link-text">{children}</span>;
 }
 

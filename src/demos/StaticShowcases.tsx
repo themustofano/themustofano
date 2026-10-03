@@ -6,12 +6,16 @@ import { NavigationDemo } from './NavigationDemo';
 import { ComposerDemo } from './ComposerDemo';
 import { AgentSelectorDemo } from './AgentSelectorDemo';
 import { AnalyticsChartDemo } from './AnalyticsChartDemo';
+import { PhoneDetectorDemo } from './PhoneDetectorDemo';
+import { AllInOneDemo, FutureDemo, CollectiveDemo } from './ImageStaticDemos';
 import { StaticPresentation, DesignCursor } from './shared';
 import './demos.css';
 import './new-static.css';
+import './phone-static.css';
+import './image-static.css';
 
-const demos = { date: DatePickerDemo, voice: VoiceChatDemo, nav: NavigationDemo, composer: ComposerDemo, agent: AgentSelectorDemo, analytics: AnalyticsChartDemo };
-// Static demos are coded, non-interactive illustrations.
+const demos = { date: DatePickerDemo, voice: VoiceChatDemo, nav: NavigationDemo, composer: ComposerDemo, agent: AgentSelectorDemo, analytics: AnalyticsChartDemo, phone: PhoneDetectorDemo, 'all-in-one': AllInOneDemo, future: FutureDemo, collective: CollectiveDemo };
+// Static demos are non-interactive illustrations.
 const cursors = { date: [469, 227], nav: [200, 98], agent: [419, 169] } as const;
 export default function StaticShowcases() {
   return <StaticPresentation value={true}>{showcases.map(item => {
